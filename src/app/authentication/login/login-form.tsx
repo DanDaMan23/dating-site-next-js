@@ -20,13 +20,17 @@ export default function LoginForm({ loginHandler }: LoginFormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm<FormData>({
     resolver: yupResolver(schema)
   })
+
   const submitHandler = (data: FormData) => {
     loginHandler(data.email, data.password)
   }
+
+  const resetFormHandler = () => reset()
 
   return (
     <form
@@ -35,26 +39,39 @@ export default function LoginForm({ loginHandler }: LoginFormProps) {
     >
       <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2'>
         <label htmlFor='email'>{text.form.email.label}:</label>
-        <input
-          {...register("email")}
-          type='email'
-          className='rounded-md w-auto lg:w-10/12 text-black'
-          placeholder={text.form.email.placeholder}
-        />
+        <div className='flex flex-col gap-2 w-auto lg:w-10/12'>
+          <input
+            {...register("email")}
+            type='email'
+            className='rounded-md w-full text-black'
+            placeholder={text.form.email.placeholder}
+          />
+          {errors.email && (
+            <p className='text-red-500'>{errors.email.message}</p>
+          )}
+        </div>
       </div>
 
       <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center gap-2'>
         <label htmlFor='password'>{text.form.password.label}:</label>
-        <input
-          {...register("password")}
-          type='password'
-          className='rounded-md w-auto lg:w-10/12 text-black'
-          placeholder={text.form.password.placeholder}
-        />
+        <div className='flex flex-col gap-2 w-auto lg:w-10/12'>
+          <input
+            {...register("password")}
+            type='password'
+            className='rounded-md w-full text-black'
+            placeholder={text.form.password.placeholder}
+          />
+          {errors.password && (
+            <p className='text-red-500'>{errors.password.message}</p>
+          )}
+        </div>
       </div>
 
       <div className='flex justify-end gap-2'>
-        <button className='border-solid border-2 p-1 rounded-md'>
+        <button
+          className='border-solid border-2 p-1 rounded-md'
+          onClick={resetFormHandler}
+        >
           {text.form.buttons.reset}
         </button>
         <button
