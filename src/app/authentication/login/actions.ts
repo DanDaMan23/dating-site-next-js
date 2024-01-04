@@ -19,7 +19,7 @@ export const login = async (email: string, password: string) => {
     }
 
     const data = await response.json()
-    console.log(data)
+    return data
   } catch (error) {
     console.error("Error fetching data", error)
   }

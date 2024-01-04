@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 
 import text from "./text.json"
+import { useRouter } from "next/navigation"
 
 interface LoginFormProps {
   loginHandler: (email: string, password: string) => void
@@ -26,8 +27,13 @@ export default function LoginForm({ loginHandler }: LoginFormProps) {
     resolver: yupResolver(schema)
   })
 
-  const submitHandler = (data: FormData) => {
-    loginHandler(data.email, data.password)
+  const { replace } = useRouter()
+
+  const submitHandler = async (data: FormData) => {
+    const loginData = await loginHandler(data.email, data.password)
+
+    sessionStorage.setItem("loginData", JSON.stringify(loginData))
+    replace("/")
   }
 
   const resetFormHandler = () => reset()
