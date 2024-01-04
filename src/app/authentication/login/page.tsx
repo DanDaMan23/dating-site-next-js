@@ -31,13 +31,13 @@ export default function Page() {
 
             <div className='flex justify-end gap-2'>
               <button className='border-solid border-2 p-1 rounded-md'>
-                Clear
+                {text.form.buttons.reset}
               </button>
               <button
                 type='submit'
                 className='border-solid border-2 border-black p-1 rounded-md bg-white text-black '
               >
-                Login
+                {text.form.buttons.submit}
               </button>
             </div>
           </form>
