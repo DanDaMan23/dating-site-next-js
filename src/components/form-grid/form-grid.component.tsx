@@ -15,7 +15,7 @@ interface FormGridProps extends FormHTMLAttributes<HTMLFormElement> {
 export default function FormGrid({
   children,
   className,
-  buttonsArea = <></>,
+  buttonsArea,
   ...props
 }: FormGridProps) {
   return (
@@ -24,8 +24,8 @@ export default function FormGrid({
       {...props}
     >
       {children}
-      <hr />
-      {buttonsArea}
+      {buttonsArea && <hr />}
+      {buttonsArea && buttonsArea}
     </form>
   )
 }
