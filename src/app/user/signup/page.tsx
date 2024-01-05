@@ -10,6 +10,13 @@ import FormGrid, {
 } from "@/components/form-grid/form-grid.component"
 
 export default function Page() {
+  const formButtons = (
+    <div className='flex flex-col lg:flex-row lg:justify-end gap-2'>
+      <Button variant='secondary'>Reset</Button>
+      <Button variant='primary'>Create Account</Button>
+    </div>
+  )
+
   return (
     <main className='p-4'>
       <p className='text-2xl'>Signup</p>
@@ -18,6 +25,7 @@ export default function Page() {
         onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
           event.preventDefault()
         }}
+        buttonsArea={formButtons}
       >
         <FormFieldGroup>
           <label htmlFor='email'>Email:</label>
@@ -68,11 +76,6 @@ export default function Page() {
             error={<FormError label='Error Test' />}
           />
         </FormFieldGroup>
-
-        <div className='flex justify-end gap-2'>
-          <Button variant='secondary'>Reset</Button>
-          <Button variant='primary'>Create Account</Button>
-        </div>
       </FormGrid>
     </main>
   )

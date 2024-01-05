@@ -8,17 +8,24 @@ import {
   TextareaHTMLAttributes
 } from "react"
 
+interface FormGridProps extends FormHTMLAttributes<HTMLFormElement> {
+  buttonsArea?: ReactNode
+}
+
 export default function FormGrid({
   children,
   className,
+  buttonsArea = <></>,
   ...props
-}: FormHTMLAttributes<HTMLFormElement>) {
+}: FormGridProps) {
   return (
     <form
       className={`grid gap-7 p-5${className ? ` ${className}` : ""}`}
       {...props}
     >
       {children}
+      <hr />
+      {buttonsArea}
     </form>
   )
 }
