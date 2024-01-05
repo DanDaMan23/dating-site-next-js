@@ -1,6 +1,11 @@
 "use client"
 
-import { FormHTMLAttributes, InputHTMLAttributes, ReactNode } from "react"
+import {
+  FormHTMLAttributes,
+  InputHTMLAttributes,
+  ReactNode,
+  TextareaHTMLAttributes
+} from "react"
 
 export default function FormGrid({
   children,
@@ -64,12 +69,24 @@ export function Input({
   )
 }
 
+export function TextArea({
+  className,
+  ...props
+}: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  return (
+    <textarea
+      className={`rounded-md text-black${className ? ` ${className}` : ""}`}
+      {...props}
+    />
+  )
+}
+
 interface ErrorProps {
   className?: string
   label: string
 }
 
-export function Error({ className, label }: ErrorProps) {
+export function FormError({ className, label }: ErrorProps) {
   return (
     <p className={`text-red-500${className ? ` ${className}` : ""}`}>{label}</p>
   )

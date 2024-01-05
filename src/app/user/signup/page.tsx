@@ -1,9 +1,11 @@
 "use client"
 
 import FormGrid, {
+  FormError,
   FormFieldGroup,
   Input,
-  InputGroup
+  InputGroup,
+  TextArea
 } from "@/components/form-grid/form-grid.component"
 
 export default function Page() {
@@ -20,7 +22,7 @@ export default function Page() {
           <label htmlFor='email'>Email:</label>
           <InputGroup
             input={<Input type='email' name='email' id='email' />}
-            error={<p className='text-red-500'>Error Test</p>}
+            error={<FormError label='Error Test' />}
           />
         </FormFieldGroup>
 
@@ -28,7 +30,41 @@ export default function Page() {
           <label htmlFor='password'>Password:</label>
           <InputGroup
             input={<Input type='password' name='password' id='password' />}
-            error={<p className='text-red-500'>Error Test</p>}
+            error={<FormError label='Error Test' />}
+          />
+        </FormFieldGroup>
+
+        <FormFieldGroup>
+          <label htmlFor='name'>Name:</label>
+          <InputGroup
+            input={<Input type='text' name='name' id='name' />}
+            error={<FormError label='Error Test' />}
+          />
+        </FormFieldGroup>
+
+        <FormFieldGroup>
+          <label htmlFor='bio'>Bio:</label>
+          <InputGroup
+            input={<TextArea name='bio' id='bio' />}
+            error={<FormError label='Error Test' />}
+          />
+        </FormFieldGroup>
+
+        <FormFieldGroup>
+          <label htmlFor='image'>Profile Picture:</label>
+          <InputGroup
+            input={
+              <Input
+                type='file'
+                name='name'
+                id='name'
+                className='text-white'
+                onChange={(e) => {
+                  console.log(e.target.value)
+                }}
+              />
+            }
+            error={<FormError label='Error Test' />}
           />
         </FormFieldGroup>
       </FormGrid>
