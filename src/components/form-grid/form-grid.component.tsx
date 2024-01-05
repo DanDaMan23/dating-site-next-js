@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  ButtonHTMLAttributes,
   FormHTMLAttributes,
   InputHTMLAttributes,
   ReactNode,
@@ -89,5 +90,29 @@ interface ErrorProps {
 export function FormError({ className, label }: ErrorProps) {
   return (
     <p className={`text-red-500${className ? ` ${className}` : ""}`}>{label}</p>
+  )
+}
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant: "primary" | "secondary"
+}
+
+export function Button({
+  className,
+  children,
+  variant,
+  ...props
+}: ButtonProps) {
+  const primaryClass = "border-black bg-white text-black"
+
+  return (
+    <button
+      className={`${
+        variant === "primary" && `${primaryClass} `
+      }border-solid border-2 rounded-md p-1${className ? ` ${className}` : ""}`}
+      {...props}
+    >
+      {children}
+    </button>
   )
 }

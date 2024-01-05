@@ -1,6 +1,7 @@
 "use client"
 
 import FormGrid, {
+  Button,
   FormError,
   FormFieldGroup,
   Input,
@@ -67,6 +68,11 @@ export default function Page() {
             error={<FormError label='Error Test' />}
           />
         </FormFieldGroup>
+
+        <div className='flex justify-end gap-2'>
+          <Button variant='secondary'>Reset</Button>
+          <Button variant='primary'>Create Account</Button>
+        </div>
       </FormGrid>
     </main>
   )
