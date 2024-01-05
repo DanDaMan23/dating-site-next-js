@@ -1,6 +1,10 @@
 "use client"
 
-import FormGrid from "@/components/form-grid/form-grid.component"
+import FormGrid, {
+  FormFieldGroup,
+  Input,
+  InputGroup
+} from "@/components/form-grid/form-grid.component"
 
 export default function Page() {
   return (
@@ -12,30 +16,21 @@ export default function Page() {
           event.preventDefault()
         }}
       >
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-2'>
+        <FormFieldGroup>
           <label htmlFor='email'>Email:</label>
-          <div className='grid gap-2 col-span-2'>
-            <input
-              type='email'
-              name='email'
-              id='email'
-              className='rounded-md text-black'
-            />
-            <p className='text-red-500'>Error Test</p>
-          </div>
-        </div>
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-2'>
+          <InputGroup
+            input={<Input type='email' name='email' id='email' />}
+            error={<p className='text-red-500'>Error Test</p>}
+          />
+        </FormFieldGroup>
+
+        <FormFieldGroup>
           <label htmlFor='password'>Password:</label>
-          <div className='grid gap-2 col-span-2'>
-            <input
-              type='password'
-              name='password'
-              id='password'
-              className='rounded-md text-black'
-            />
-            <p className='text-red-500'>Error Test</p>
-          </div>
-        </div>
+          <InputGroup
+            input={<Input type='password' name='password' id='password' />}
+            error={<p className='text-red-500'>Error Test</p>}
+          />
+        </FormFieldGroup>
       </FormGrid>
     </main>
   )
