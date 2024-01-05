@@ -1,9 +1,17 @@
+"use client"
+
+import FormGrid from "@/components/form-grid/form-grid.component"
+
 export default function Page() {
   return (
     <main className='p-4'>
       <p className='text-2xl'>Signup</p>
       {/* Signup Form */}
-      <form className='grid gap-7 p-5'>
+      <FormGrid
+        onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+          event.preventDefault()
+        }}
+      >
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-2'>
           <label htmlFor='email'>Email:</label>
           <div className='grid gap-2 col-span-2'>
@@ -28,7 +36,7 @@ export default function Page() {
             <p className='text-red-500'>Error Test</p>
           </div>
         </div>
-      </form>
+      </FormGrid>
     </main>
   )
 }
