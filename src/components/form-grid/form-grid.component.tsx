@@ -13,7 +13,10 @@ export default function FormGrid({
 }: FormGridProps) {
   console.log(props)
   return (
-    <form className={`grid gap-7 p-5 ${className}`} {...props}>
+    <form
+      className={`grid gap-7 p-5${className ? ` ${className}` : ""}`}
+      {...props}
+    >
       {children}
     </form>
   )
