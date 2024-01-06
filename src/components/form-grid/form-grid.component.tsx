@@ -5,7 +5,9 @@ import {
   FormHTMLAttributes,
   InputHTMLAttributes,
   ReactNode,
-  TextareaHTMLAttributes
+  TextareaHTMLAttributes,
+  ForwardedRef,
+  forwardRef
 } from "react"
 
 interface FormGridProps extends FormHTMLAttributes<HTMLFormElement> {
@@ -65,17 +67,23 @@ export function InputGroup({ className, input, error }: InputGroupProps) {
   )
 }
 
-export function Input({
-  className,
-  ...props
-}: InputHTMLAttributes<HTMLInputElement>) {
+const InputComponent = (
+  { className, ...props }: InputHTMLAttributes<HTMLInputElement>,
+  ref: ForwardedRef<HTMLInputElement>
+) => {
   return (
     <input
+      ref={ref}
       className={`rounded-md text-black${className ? ` ${className}` : ""}`}
       {...props}
     />
   )
 }
+
+export const Input = forwardRef<
+  HTMLInputElement,
+  InputHTMLAttributes<HTMLInputElement>
+>(InputComponent)
 
 export function TextArea({
   className,

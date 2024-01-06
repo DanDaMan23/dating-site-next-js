@@ -1,6 +1,8 @@
 "use client"
 
 import { FormEvent } from "react"
+import { Controller, useForm } from "react-hook-form"
+import * as yup from "yup"
 import FormGrid, {
   Button,
   FormError,
@@ -9,51 +11,85 @@ import FormGrid, {
   InputGroup,
   TextArea
 } from "@/components/form-grid/form-grid.component"
+import { yupResolver } from "@hookform/resolvers/yup"
 
 export default function SignupForm() {
+  const schema = yup.object({
+    email: yup.string().required(),
+    password: yup.string().required(),
+    name: yup.string().required(),
+    bio: yup.string().required(),
+    image: yup.mixed().required()
+  })
+
+  type FormData = yup.InferType<typeof schema>
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors }
+  } = useForm<FormData>({
+    resolver: yupResolver(schema)
+  })
+
+  const submitHandler = async (data: FormData) => {
+    console.log(data)
+  }
+
+  const resetFormHandler = () => reset()
+
   const formButtons = (
     <div className='flex flex-col lg:flex-row lg:justify-end gap-2'>
-      <Button variant='secondary'>Reset</Button>
+      <Button variant='secondary' onClick={resetFormHandler}>
+        Reset
+      </Button>
       <Button variant='primary'>Create Account</Button>
     </div>
   )
 
   return (
-    <FormGrid
-      onSubmit={(event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-      }}
-      buttonsArea={formButtons}
-    >
+    <FormGrid onSubmit={handleSubmit(submitHandler)} buttonsArea={formButtons}>
       <FormFieldGroup>
         <label htmlFor='email'>Email:</label>
         <InputGroup
-          input={<Input type='email' name='email' id='email' />}
-          error={<FormError label='Error Test' />}
+          input={<Input {...register("email")} type='email' />}
+          error={
+            errors.email && <FormError label={errors.email.message as string} />
+          }
         />
       </FormFieldGroup>
 
       <FormFieldGroup>
         <label htmlFor='password'>Password:</label>
         <InputGroup
-          input={<Input type='password' name='password' id='password' />}
-          error={<FormError label='Error Test' />}
+          input={<Input {...register("password")} type='password' />}
+          error={
+            errors.password && (
+              <FormError label={errors.password.message as string} />
+            )
+          }
         />
       </FormFieldGroup>
 
       <FormFieldGroup>
         <label htmlFor='name'>Name:</label>
         <InputGroup
-          input={<Input type='text' name='name' id='name' />}
-          error={<FormError label='Error Test' />}
+          input={<Input {...register("name")} type='text' />}
+          error={
+            errors.name && <FormError label={errors.name.message as string} />
+          }
         />
       </FormFieldGroup>
 
       <FormFieldGroup>
         <label htmlFor='bio'>Bio:</label>
         <InputGroup
-          input={<TextArea name='bio' id='bio' />}
-          error={<FormError label='Error Test' />}
+          input={<TextArea />}
+          error={
+            errors.bio && <FormError label={errors.bio.message as string} />
+          }
         />
       </FormFieldGroup>
 
@@ -61,17 +97,25 @@ export default function SignupForm() {
         <label htmlFor='image'>Profile Picture:</label>
         <InputGroup
           input={
-            <Input
-              type='file'
-              name='name'
-              id='name'
-              className='text-white'
-              onChange={(e) => {
-                console.log(e.target.value)
-              }}
+            <Controller
+              name='image'
+              control={control}
+              render={({ field }) => (
+                <Input
+                  type='file'
+                  name='image'
+                  id='image'
+                  className='text-white'
+                  onChange={(e) => {
+                    field.onChange(e.target.files)
+                  }}
+                />
+              )}
             />
           }
-          error={<FormError label='Error Test' />}
+          error={
+            errors.image && <FormError label={errors.image.message as string} />
+          }
         />
       </FormFieldGroup>
     </FormGrid>
