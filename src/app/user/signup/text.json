@@ -1,0 +1,19 @@
+{
+  "title": "Signup",
+  "form": {
+    "buttons": {
+      "secondary": "Reset",
+      "primary": "Create Account"
+    },
+    "fields": {
+      "email": { "label": "Email", "placeholder": "Enter your Email" },
+      "password": {
+        "label": "Password",
+        "placeholder": "Create your password"
+      },
+      "name": { "label": "Name", "placeholder": "Enter your Name" },
+      "bio": { "label": "Bio", "placeholder": "Tell us about yourself" },
+      "image": { "label": "Profile Picture" }
+    }
+  }
+}
