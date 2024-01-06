@@ -85,17 +85,21 @@ export const Input = forwardRef<
   InputHTMLAttributes<HTMLInputElement>
 >(InputComponent)
 
-export function TextArea({
-  className,
-  ...props
-}: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return (
-    <textarea
-      className={`rounded-md text-black${className ? ` ${className}` : ""}`}
-      {...props}
-    />
-  )
-}
+const TextAreaComponent = (
+  { className, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+  ref: ForwardedRef<HTMLTextAreaElement>
+) => (
+  <textarea
+    ref={ref}
+    className={`rounded-md text-black${className ? ` ${className}` : ""}`}
+    {...props}
+  />
+)
+
+export const TextArea = forwardRef<
+  HTMLTextAreaElement,
+  TextareaHTMLAttributes<HTMLTextAreaElement>
+>(TextAreaComponent)
 
 interface ErrorProps {
   className?: string

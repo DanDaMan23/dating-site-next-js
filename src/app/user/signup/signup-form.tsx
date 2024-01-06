@@ -86,7 +86,7 @@ export default function SignupForm() {
       <FormFieldGroup>
         <label htmlFor='bio'>Bio:</label>
         <InputGroup
-          input={<TextArea />}
+          input={<TextArea {...register("bio")} />}
           error={
             errors.bio && <FormError label={errors.bio.message as string} />
           }
