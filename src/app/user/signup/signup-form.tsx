@@ -12,8 +12,14 @@ import FormGrid, {
 } from "@/components/form-grid/form-grid.component"
 import { yupResolver } from "@hookform/resolvers/yup"
 import text from "./text.json"
+import { signupBody } from "./actions"
+import { useRouter } from "next/navigation"
 
-export default function SignupForm() {
+interface SignupFormProps {
+  signupHandler: (body: signupBody) => void
+}
+
+export default function SignupForm({ signupHandler }: SignupFormProps) {
   const schema = yup.object({
     email: yup.string().required(),
     password: yup.string().required(),
@@ -34,7 +40,10 @@ export default function SignupForm() {
     resolver: yupResolver(schema)
   })
 
+  const { replace } = useRouter()
+
   const submitHandler = async (data: FormData) => {
+    replace("/authentication/login")
     console.log(data)
   }
 
@@ -45,7 +54,9 @@ export default function SignupForm() {
       <Button variant='secondary' onClick={resetFormHandler}>
         {text.form.buttons.secondary}
       </Button>
-      <Button variant='primary'>{text.form.buttons.primary}</Button>
+      <Button type='submit' variant='primary'>
+        {text.form.buttons.primary}
+      </Button>
     </div>
   )
 
