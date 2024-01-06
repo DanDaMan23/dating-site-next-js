@@ -1,6 +1,5 @@
 "use client"
 
-import { FormEvent } from "react"
 import { Controller, useForm } from "react-hook-form"
 import * as yup from "yup"
 import FormGrid, {
@@ -12,6 +11,7 @@ import FormGrid, {
   TextArea
 } from "@/components/form-grid/form-grid.component"
 import { yupResolver } from "@hookform/resolvers/yup"
+import text from "./text.json"
 
 export default function SignupForm() {
   const schema = yup.object({
@@ -43,18 +43,24 @@ export default function SignupForm() {
   const formButtons = (
     <div className='flex flex-col lg:flex-row lg:justify-end gap-2'>
       <Button variant='secondary' onClick={resetFormHandler}>
-        Reset
+        {text.form.buttons.secondary}
       </Button>
-      <Button variant='primary'>Create Account</Button>
+      <Button variant='primary'>{text.form.buttons.primary}</Button>
     </div>
   )
 
   return (
     <FormGrid onSubmit={handleSubmit(submitHandler)} buttonsArea={formButtons}>
       <FormFieldGroup>
-        <label htmlFor='email'>Email:</label>
+        <label htmlFor='email'>{text.form.fields.email.label}:</label>
         <InputGroup
-          input={<Input {...register("email")} type='email' />}
+          input={
+            <Input
+              {...register("email")}
+              type='email'
+              placeholder={text.form.fields.email.placeholder}
+            />
+          }
           error={
             errors.email && <FormError label={errors.email.message as string} />
           }
@@ -62,9 +68,15 @@ export default function SignupForm() {
       </FormFieldGroup>
 
       <FormFieldGroup>
-        <label htmlFor='password'>Password:</label>
+        <label htmlFor='password'>{text.form.fields.password.label}:</label>
         <InputGroup
-          input={<Input {...register("password")} type='password' />}
+          input={
+            <Input
+              {...register("password")}
+              type='password'
+              placeholder={text.form.fields.password.placeholder}
+            />
+          }
           error={
             errors.password && (
               <FormError label={errors.password.message as string} />
@@ -74,9 +86,15 @@ export default function SignupForm() {
       </FormFieldGroup>
 
       <FormFieldGroup>
-        <label htmlFor='name'>Name:</label>
+        <label htmlFor='name'>{text.form.fields.name.label}:</label>
         <InputGroup
-          input={<Input {...register("name")} type='text' />}
+          input={
+            <Input
+              {...register("name")}
+              type='text'
+              placeholder={text.form.fields.name.placeholder}
+            />
+          }
           error={
             errors.name && <FormError label={errors.name.message as string} />
           }
@@ -84,9 +102,14 @@ export default function SignupForm() {
       </FormFieldGroup>
 
       <FormFieldGroup>
-        <label htmlFor='bio'>Bio:</label>
+        <label htmlFor='bio'>{text.form.fields.bio.label}:</label>
         <InputGroup
-          input={<TextArea {...register("bio")} />}
+          input={
+            <TextArea
+              {...register("bio")}
+              placeholder={text.form.fields.bio.placeholder}
+            />
+          }
           error={
             errors.bio && <FormError label={errors.bio.message as string} />
           }
@@ -94,7 +117,7 @@ export default function SignupForm() {
       </FormFieldGroup>
 
       <FormFieldGroup>
-        <label htmlFor='image'>Profile Picture:</label>
+        <label htmlFor='image'>{text.form.fields.image.label}:</label>
         <InputGroup
           input={
             <Controller
