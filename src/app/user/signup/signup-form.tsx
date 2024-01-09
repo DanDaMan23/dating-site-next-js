@@ -25,7 +25,7 @@ export default function SignupForm({ signupHandler }: SignupFormProps) {
     password: yup.string().required(),
     name: yup.string().required(),
     bio: yup.string().required(),
-    image: yup.mixed().required()
+    image: yup.mixed()
   })
 
   type FormData = yup.InferType<typeof schema>
@@ -123,32 +123,6 @@ export default function SignupForm({ signupHandler }: SignupFormProps) {
           }
           error={
             errors.bio && <FormError label={errors.bio.message as string} />
-          }
-        />
-      </FormFieldGroup>
-
-      <FormFieldGroup>
-        <label htmlFor='image'>{text.form.fields.image.label}:</label>
-        <InputGroup
-          input={
-            <Controller
-              name='image'
-              control={control}
-              render={({ field }) => (
-                <Input
-                  type='file'
-                  name='image'
-                  id='image'
-                  className='text-white'
-                  onChange={(e) => {
-                    field.onChange(e.target.files && e.target.files[0])
-                  }}
-                />
-              )}
-            />
-          }
-          error={
-            errors.image && <FormError label={errors.image.message as string} />
           }
         />
       </FormFieldGroup>
