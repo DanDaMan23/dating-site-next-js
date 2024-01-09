@@ -43,8 +43,8 @@ export default function SignupForm({ signupHandler }: SignupFormProps) {
   const { replace } = useRouter()
 
   const submitHandler = async (data: FormData) => {
+    await signupHandler(data)
     replace("/authentication/login")
-    console.log(data)
   }
 
   const resetFormHandler = () => reset()

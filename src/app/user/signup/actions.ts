@@ -5,7 +5,7 @@ export interface signupBody {
   password: string
   name: string
   bio: string
-  image: File
+  // image: File
 }
 
 export const signup = async (body: signupBody) => {
@@ -16,7 +16,7 @@ export const signup = async (body: signupBody) => {
         method: "POST",
         headers: {
           Accept: "applicaiton/json",
-          "Content-Type": "multipart/form-data"
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(body)
       }
